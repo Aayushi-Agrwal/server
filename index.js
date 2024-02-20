@@ -12,7 +12,9 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Route to handle getting access token
 app.get("/getAccessToken", async function (req, res) {
+  // Extract code from query parameter
   req.query.code;
   const params =
     "?client_id=" +
@@ -22,6 +24,7 @@ app.get("/getAccessToken", async function (req, res) {
     "&code=" +
     req.query.code;
 
+  // Make request to GitHub OAuth endpoint to exchange code for access token
   await fetch("https://github.com/login/oauth/access_token" + params, {
     method: "POST",
     headers: {
@@ -36,8 +39,12 @@ app.get("/getAccessToken", async function (req, res) {
     });
 });
 
+// Route to handle getting user data
 app.get("/getUserData", async function (req, res) {
+  // Extract Authorization header
   req.get("Authorization");
+
+  // Make request to GitHub API to get user data
   await fetch("https://api.github.com/user", {
     method: "GET",
     headers: {
@@ -52,6 +59,7 @@ app.get("/getUserData", async function (req, res) {
     });
 });
 
+// Start the server
 app.listen(4000, function () {
   console.log("CORS server running on port 4000");
 });
