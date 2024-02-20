@@ -11,6 +11,11 @@ const CLIENT_SECRET = "59b22cab4f3c5ac8aaaaac86290c1e0948dbb500";
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
+headers.append(
+  "Access-Control-Allow-Origin",
+  "https://clouddefence-dependencies.vercel.app/"
+);
+headers.append("Access-Control-Allow-Credentials", "true");
 
 // Route to handle getting access token
 app.get("/getAccessToken", async function (req, res) {
